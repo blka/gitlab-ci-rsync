@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
 url=$1
-branch=$2
+local_folder=$2
+
 
 if [ -z "$SSH_PRIVATE_KEY" ]; then
 	>&2 echo "Set SSH_PRIVATE_KEY environment variable"
@@ -10,7 +11,7 @@ fi
 
 ssh_host=$(echo $url | sed 's/.*@//' | sed 's/[:/].*//')
 if [ -z "$ssh_host" ]; then
-	>&2 echo "Usage: $0 <user@git.host:project | ssh://user@git.host:port/project> [<branch>]"
+	>&2 echo "Usage: $0 <user@host:folder | ssh://user@host:port/folder> [<branch>]"
 	exit 1
 fi
 
@@ -25,4 +26,4 @@ echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
 ssh-keyscan -H $ssh_port "$ssh_host" >> ~/.ssh/known_hosts
 
-git push $url HEAD:${branch:-master} $([ -z "$DISABLE_FORCE_PUSH" ] && echo --force)
+rsync -avz $local_folder -e ssh $url
