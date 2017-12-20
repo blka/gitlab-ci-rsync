@@ -1,4 +1,4 @@
-# GitLab CI runner that pushes to git
+# GitLab CI runner that rsyncs to remote server
 
 This GitLab CI runner image allows to sync a GitLab project to a remote location (running ssh server) via rsync (useful for Doxygen, etc.)
 
