@@ -36,9 +36,3 @@ Go to GitLab > Project > Settings > CI/CD Pipelines > Secret Variables, and add 
 ```
 
 
-### Pushing to Git running on a non-standard port
-
-```console
-rsync-script.sh ssh://dokku@dokku.me:8022/my_remote/path
-```
-
