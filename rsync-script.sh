@@ -26,4 +26,4 @@ echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
 ssh-keyscan -H $ssh_port "$ssh_host" >> ~/.ssh/known_hosts
 
-rsync -avz $local_folder -e ssh $url
+rsync -avz $local_folder -e ssh $ssh_port $url
